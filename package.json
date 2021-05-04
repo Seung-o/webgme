@@ -1,7 +1,7 @@
 {
-  "name": "webgme",
-  "version": "2.42.1",
-  "description": "Web-based Generic Modeling Environment",
+  "name": "webmodelica",
+  "version": "0.0.1",
+  "description": "Web-based Modelica Environment",
   "engines": {
     "node": ">=4.0.0"
   },
@@ -16,10 +16,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "http://github.com/webgme/webgme.git"
+    "url": "https://github.com/Seung-o/webgme"
   },
   "bugs": {
-    "url": "http://github.com/webgme/webgme/issues"
+    "url": "https://github.com/Seung-o/webgme/issues"
   },
   "license": "MIT",
   "dependencies": {

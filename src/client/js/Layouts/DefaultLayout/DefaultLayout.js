@@ -11,10 +11,10 @@ define(['jquery-layout',
     'text!./templates/DefaultLayout.html',
     'text!./DefaultLayoutConfig.json'
 ], function (_jQueryLayout,
-             Logger,
-             ComponentSettings,
-             defaultLayoutTemplate,
-             DefaultLayoutConfigJSON) {
+    Logger,
+    ComponentSettings,
+    defaultLayoutTemplate,
+    DefaultLayoutConfigJSON) {
 
     'use strict';
 
@@ -77,10 +77,10 @@ define(['jquery-layout',
                         self._onEastResize(true);
                     },
                     onopen: function () {
-                        self._updatePaneSettings('east', {initClosed: false});
+                        self._updatePaneSettings('east', { initClosed: false });
                     },
                     onclose: function () {
-                        self._updatePaneSettings('east', {initClosed: true});
+                        self._updatePaneSettings('east', { initClosed: true });
                     }
                 },
                 west: {
@@ -95,10 +95,10 @@ define(['jquery-layout',
                         self._onWestResize(true);
                     },
                     onopen: function () {
-                        self._updatePaneSettings('west', {initClosed: false});
+                        self._updatePaneSettings('west', { initClosed: false });
                     },
                     onclose: function () {
-                        self._updatePaneSettings('west', {initClosed: true});
+                        self._updatePaneSettings('west', { initClosed: true });
                     }
                 },
                 center: {
@@ -214,7 +214,7 @@ define(['jquery-layout',
             i;
 
         if (updateSettings === true && w >= SIDE_PANEL_WIDTH) {
-            this._updatePaneSettings('east', {size: w});
+            this._updatePaneSettings('east', { size: w });
         }
 
         for (i = 0; i < len; i += 1) {
@@ -229,7 +229,7 @@ define(['jquery-layout',
             h0;
 
         if (updateSettings === true && w >= SIDE_PANEL_WIDTH) {
-            this._updatePaneSettings('west', {size: w});
+            this._updatePaneSettings('west', { size: w });
         }
 
         //TODO: fix this
@@ -242,7 +242,7 @@ define(['jquery-layout',
 
     DefaultLayout.prototype._updatePaneSettings = function (paneName, paneOption) {
         var self = this,
-            newSettings = {paneOptionsOverwrites: {}};
+            newSettings = { paneOptionsOverwrites: {} };
 
         newSettings.paneOptionsOverwrites[paneName] = paneOption;
 

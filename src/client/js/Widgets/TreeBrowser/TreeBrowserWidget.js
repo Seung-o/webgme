@@ -69,7 +69,7 @@ define(['js/logger',
             selector: '.fancytree-node',
             position: function (selector/*, x, y*/) {
                 var _offset = selector.$trigger.find('.fancytree-title').offset();
-                selector.$menu.css({top: _offset.top + 10, left: _offset.left - 10});
+                selector.$menu.css({ top: _offset.top + 10, left: _offset.left - 10 });
             },
             build: function ($trigger/*, e*/) {
                 // this callback is executed every time the menu is to be shown
@@ -215,7 +215,7 @@ define(['js/logger',
             edit: {
                 adjustWidthOfs: 4,
                 allowEmpty: true,
-                inputCss: {minWidth: '3em'},
+                inputCss: { minWidth: '3em' },
                 triggerCancel: ['enter'],
                 triggerStart: [],
                 beforeEdit: function (event, data) {
@@ -272,64 +272,69 @@ define(['js/logger',
      * @returns {*}
      */
     TreeBrowserWidget.prototype.createNodes = function (parentNode, objDescriptors) {
-        var childrenParams = [],
-            prevChildrenKeys,
-            newNodes,
-            i;
 
-        if (parentNode === null) {
-            // Now get the root node object.
-            parentNode = this._treeInstance.getRootNode();
-        }
+        if (objDescriptor.isMetaNode === ture) {
+            var childrenParams = [],
+                prevChildrenKeys,
+                newNodes,
+                i;
 
-        if (parentNode.getChildren()) {
-            prevChildrenKeys = {};
-            parentNode.getChildren().forEach(function (childNode) {
-                prevChildrenKeys[childNode.key] = true;
-            });
-        }
+            if (parentNode === null) {
+                // Now get the root node object.
+                parentNode = this._treeInstance.getRootNode();
+            }
 
-        for (i = 0; i < objDescriptors.length; i += 1) {
-            childrenParams.push({
-                title: objDescriptors[i].name,
-                tooltip: objDescriptors[i].libraryInfo ? objDescriptors[i].libraryInfo :
-                    objDescriptors[i].metaType ? '<<' + objDescriptors[i].metaType + '>>' : '',
-                key: objDescriptors[i].id,
-                folder: false,
-                lazy: objDescriptors[i].hasChildren,
-                extraClasses: objDescriptors[i].class || '',
-                icon: objDescriptors[i].icon || null,
-                isConnection: objDescriptors[i].isConnection,
-                isAbstract: objDescriptors[i].isAbstract,
-                isLibrary: objDescriptors[i].isLibrary,
-                isLibraryRoot: objDescriptors[i].isLibraryRoot,
-                libraryInfo: objDescriptors[i].libraryInfo,
-                metaType: objDescriptors[i].metaType,
-                isMetaNode: objDescriptors[i].isMetaNode
-            });
-        }
+            if (parentNode.getChildren()) {
+                prevChildrenKeys = {};
+                parentNode.getChildren().forEach(function (childNode) {
+                    prevChildrenKeys[childNode.key] = true;
+                });
+            }
 
-        if (childrenParams.length > 0) {
-            parentNode.addChildren(childrenParams);
+            for (i = 0; i < objDescriptors.length; i += 1) {
+                childrenParams.push({
+                    title: objDescriptors[i].name,
+                    tooltip: objDescriptors[i].libraryInfo ? objDescriptors[i].libraryInfo :
+                        objDescriptors[i].metaType ? '<<' + objDescriptors[i].metaType + '>>' : '',
+                    key: objDescriptors[i].id,
+                    folder: false,
+                    lazy: objDescriptors[i].hasChildren,
+                    extraClasses: objDescriptors[i].class || '',
+                    icon: objDescriptors[i].icon || null,
+                    isConnection: objDescriptors[i].isConnection,
+                    isAbstract: objDescriptors[i].isAbstract,
+                    isLibrary: objDescriptors[i].isLibrary,
+                    isLibraryRoot: objDescriptors[i].isLibraryRoot,
+                    libraryInfo: objDescriptors[i].libraryInfo,
+                    metaType: objDescriptors[i].metaType,
+                    isMetaNode: objDescriptors[i].isMetaNode
+                });
+            }
 
-            // sortChildren sorts newNodes too if it is not copied!
-            newNodes = parentNode.getChildren().slice();
-            this.sortChildren(parentNode, false);
-            this._logger.debug('nodes created', newNodes);
-        } else {
-            newNodes = [];
-            this._logger.debug('no new nodes created');
-        }
+            if (childrenParams.length > 0) {
+                parentNode.addChildren(childrenParams);
 
-        if (prevChildrenKeys) {
-            for (i = newNodes.length - 1; i >= 0; i -= 1) {
-                if (prevChildrenKeys[newNodes[i].key] === true) {
-                    newNodes.splice(i, 1);
+                // sortChildren sorts newNodes too if it is not copied!
+                newNodes = parentNode.getChildren().slice();
+                this.sortChildren(parentNode, false);
+                this._logger.debug('nodes created', newNodes);
+            } else {
+                newNodes = [];
+                this._logger.debug('no new nodes created');
+            }
+
+            if (prevChildrenKeys) {
+                for (i = newNodes.length - 1; i >= 0; i -= 1) {
+                    if (prevChildrenKeys[newNodes[i].key] === true) {
+                        newNodes.splice(i, 1);
+                    }
                 }
             }
+
+            return newNodes;
+
         }
 
-        return newNodes;
     };
 
     /**
@@ -338,54 +343,57 @@ define(['js/logger',
      * @param objDescriptor
      */
     TreeBrowserWidget.prototype.createNode = function (parentNode, objDescriptor) {
-        var beforeNode, existingChildren, i, newNode;
-        objDescriptor.name = objDescriptor.name || '';
-        //check if the parentNode is null or not
-        //when null, the new node belongs to the root
-        if (parentNode === null) {
-            // Now get the root node object
-            parentNode = this._treeInstance.getRootNode();
-        }
 
-        //find the new node's place in ABC order
-        beforeNode = null;
+        if (objDescriptor.isMetaNode === ture) {
+            var beforeNode, existingChildren, i, newNode;
+            objDescriptor.name = objDescriptor.name || '';
+            //check if the parentNode is null or not
+            //when null, the new node belongs to the root
+            if (parentNode === null) {
+                // Now get the root node object
+                parentNode = this._treeInstance.getRootNode();
+            }
 
-        existingChildren = parentNode.getChildren();
-        if (existingChildren) {
+            //find the new node's place in ABC order
+            beforeNode = null;
 
-            for (i = existingChildren.length - 1; i >= 0; i -= 1) {
-                if (objDescriptor.name.toLowerCase() < existingChildren[i].title.toLowerCase()) {
-                    beforeNode = existingChildren[i];
-                } else {
-                    break;
+            existingChildren = parentNode.getChildren();
+            if (existingChildren) {
+
+                for (i = existingChildren.length - 1; i >= 0; i -= 1) {
+                    if (objDescriptor.name.toLowerCase() < existingChildren[i].title.toLowerCase()) {
+                        beforeNode = existingChildren[i];
+                    } else {
+                        break;
+                    }
                 }
             }
+
+            // Call the FancyTreeNode.addChildren() and pass options for the new node.
+            newNode = parentNode.addChildren({
+                title: objDescriptor.name,
+                tooltip: objDescriptor.libraryInfo ? objDescriptor.libraryInfo :
+                    objDescriptor.metaType ? '<<' + objDescriptor.metaType + '>>' : '',
+                key: objDescriptor.id,
+                folder: false,
+                lazy: objDescriptor.hasChildren,
+                extraClasses: objDescriptor.class || '',
+                icon: objDescriptor.icon || null,
+                isConnection: objDescriptor.isConnection,
+                isAbstract: objDescriptor.isAbstract,
+                isLibrary: objDescriptor.isLibrary,
+                isLibraryRoot: objDescriptor.isLibraryRoot,
+                libraryInfo: objDescriptor.libraryInfo,
+                metaType: objDescriptor.metaType,
+                isMetaNode: objDescriptor.isMetaNode
+            }, beforeNode);
+
+            this.sortChildren(parentNode, false);
+            this._logger.debug('New node created: ' + newNode.key);
+
+            //return the newly created node
+            return newNode;
         }
-
-        // Call the FancyTreeNode.addChildren() and pass options for the new node.
-        newNode = parentNode.addChildren({
-            title: objDescriptor.name,
-            tooltip: objDescriptor.libraryInfo ? objDescriptor.libraryInfo :
-                objDescriptor.metaType ? '<<' + objDescriptor.metaType + '>>' : '',
-            key: objDescriptor.id,
-            folder: false,
-            lazy: objDescriptor.hasChildren,
-            extraClasses: objDescriptor.class || '',
-            icon: objDescriptor.icon || null,
-            isConnection: objDescriptor.isConnection,
-            isAbstract: objDescriptor.isAbstract,
-            isLibrary: objDescriptor.isLibrary,
-            isLibraryRoot: objDescriptor.isLibraryRoot,
-            libraryInfo: objDescriptor.libraryInfo,
-            metaType: objDescriptor.metaType,
-            isMetaNode: objDescriptor.isMetaNode
-        }, beforeNode);
-
-        this.sortChildren(parentNode, false);
-        this._logger.debug('New node created: ' + newNode.key);
-
-        //return the newly created node
-        return newNode;
     };
 
     /**
@@ -1079,7 +1087,7 @@ define(['js/logger',
                 if (self._currentFilters.titleFilter.text) {
                     if (self._currentFilters.titleFilter.type === 'caseInsensitive') {
                         return node.title.toLowerCase().indexOf(
-                                self._currentFilters.titleFilter.text.toLowerCase()) > -1;
+                            self._currentFilters.titleFilter.text.toLowerCase()) > -1;
                     } else if (self._currentFilters.titleFilter.type === 'regex') {
                         try {
                             return (new RegExp(self._currentFilters.titleFilter.text).test(node.title));
@@ -1104,7 +1112,7 @@ define(['js/logger',
                 if (self._currentFilters.metaTypeFilter.text) {
                     if (self._currentFilters.metaTypeFilter.type === 'caseInsensitive') {
                         return (node.data.metaType || '').toLowerCase().indexOf(
-                                self._currentFilters.metaTypeFilter.text.toLowerCase()) > -1;
+                            self._currentFilters.metaTypeFilter.text.toLowerCase()) > -1;
                     } else if (self._currentFilters.metaTypeFilter.type === 'regex') {
                         try {
                             return (new RegExp(self._currentFilters.metaTypeFilter.text)

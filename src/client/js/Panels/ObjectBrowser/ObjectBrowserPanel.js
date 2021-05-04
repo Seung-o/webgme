@@ -89,12 +89,12 @@ define(['js/PanelBase/PanelBaseWithHeader',
         // });
 
         this.$el.html('<ul class="nav nav-tabs">' +
-            '<li class="composition active"><a class="composition-anchor" href="#composition" data-toggle="tab">Composition</a></li>' +
             '<li class="inheritance"><a href="#inheritance" data-toggle="tab">Inheritance</a></li>' +
+            '<li class="composition active"><a class="composition-anchor" href="#composition" data-toggle="tab">Composition</a></li>' +
             '<li class="crosscut"><a href="#crosscut" data-toggle="tab">Crosscut</a></li>' +
             '</ul>' + '<div class="tab-content">' +
-            '<div class="tab-pane active" id="composition">composition</div>' +
             '<div class="tab-pane" id="inheritance">inheritance</div>' +
+            '<div class="tab-pane active" id="composition">composition</div>' +
             '<div class="tab-pane" id="crosscut">crosscut</div>' +
             '</div>');
 

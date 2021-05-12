@@ -48,3 +48,4 @@ workerList.nedb
 typed_docs/
 
 # package-lock.json
+/.vs/VSWorkspaceState.json

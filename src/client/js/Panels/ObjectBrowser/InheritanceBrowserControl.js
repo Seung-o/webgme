@@ -162,7 +162,7 @@ define(['js/logger',
                 childTreeNode = null;
 
                 //check if the node could be retreived from the client
-                if (childNode) {
+                if (childNode && childNode.isMetaNode == true) {
                     metaTypeInfo = this.getMetaInfo(childNode);
                     //the node was present on the client side, render ist full data
                     childrenDescriptors.push({

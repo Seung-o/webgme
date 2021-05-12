@@ -1,11 +1,11 @@
 {
-  "name": "webmodelica",
-  "version": "0.0.1",
+  "name": "@seung-o/webmodelica",
+  "version": "0.0.0",
   "description": "Web-based Modelica Environment",
   "engines": {
     "node": ">=4.0.0"
   },
-  "homepage": "http://github.com/webgme/webgme",
+  "homepage": "https://github.com/Seung-o/webmodelica",
   "keywords": [
     "webgme",
     "gme",
@@ -16,10 +16,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Seung-o/webgme"
+    "url": "https://github.com/Seung-o/webmodelica"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   },
   "bugs": {
-    "url": "https://github.com/Seung-o/webgme/issues"
+    "url": "https://github.com/Seung-o/webmodelica/issues"
   },
   "license": "MIT",
   "dependencies": {
